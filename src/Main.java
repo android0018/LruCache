@@ -2,7 +2,7 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Lru<Integer,Integer> lru = new Lru<>(3);
+        CacheType<Integer,Integer> lru = CacheFactory.GenerateCache("LRU",3);
         lru.put(1, 1);
         lru.put(2, 2);
         lru.put(3, 3);

@@ -1,13 +1,14 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class Lru<K,V > {
+public class Lru<K,V > extends CacheType<K,V>{
     DoublyLinkedList<K,V> doublyLinkedList;
     Map<K,Node<K,V>> map;
     public Lru(int size) {
         this.doublyLinkedList = new DoublyLinkedList<>(size);
         this.map = new HashMap<>();
     }
+    @Override
     public void put(K key, V value){
         if(map.containsKey(key)) {
             doublyLinkedList.remove(map.get(key));
@@ -24,7 +25,7 @@ public class Lru<K,V > {
         }
         return;
     }
-
+    @Override
     public int get(K key){
         if(!map.containsKey(key)){
             return -1;
@@ -32,7 +33,6 @@ public class Lru<K,V > {
         Node<K,V> node = map.get(key);
         doublyLinkedList.remove(node);
         doublyLinkedList.addFirst(map.get(key));
-        return (int) node.value;
+        return (int)node.value;
     }
-
 }
